@@ -5,7 +5,6 @@ const setupAndStartServer = () => {
     const app = express()
 
     app.listen(PORT, () => {
-        console.log('happy ending')
         console.log(`Server is running on port no: ${PORT}`)
     })
 }
