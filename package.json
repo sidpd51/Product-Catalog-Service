@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/sidpd51/Product-Catalog-Service#readme",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "mongoose": "^8.8.2"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
