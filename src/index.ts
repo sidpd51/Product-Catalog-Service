@@ -1,9 +1,13 @@
 import express from 'express'
+import { PORT } from './config/serverConfig';
 
-const app = express()
+const setupAndStartServer = ():void =>{
+    const app = express()
 
-const PORT:number = 3000;
+    app.listen(PORT,()=>{
+        console.log(`Server is running on port no: ${PORT}`)
+    })
+}
 
-app.listen(PORT,()=>{
-    console.log(`Server is running on port no: ${PORT}`)
-})
+
+setupAndStartServer()
