@@ -1,0 +1,38 @@
+{
+  "name": "product-catalog-service",
+  "version": "1.0.0",
+  "description": "The Product Catalog Service is a backend service that manages a product catalog. It offers RESTful APIs for operations like creating, updating, deleting, and retrieving product information, as well as filtering products based on specific criteria.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./dist/index.js",
+    "dev": "nodemon ./src/index.ts",
+    "build": "tsc --build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidpd51/Product-Catalog-Service.git"
+  },
+  "keywords": [
+    "product",
+    "server",
+    "product",
+    "catalog",
+    "service"
+  ],
+  "author": "sidpd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sidpd51/Product-Catalog-Service/issues"
+  },
+  "homepage": "https://github.com/sidpd51/Product-Catalog-Service#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
