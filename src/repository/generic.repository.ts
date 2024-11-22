@@ -1,13 +1,13 @@
 import mongoose, { Document, Model, Types } from "mongoose";
 
-export default class GenericRepository<T extends Document>{
+export default class GenericRepository<T extends Document> {
     private _model: Model<T>
 
-    constructor(model: Model<T>){
-        this._model=model
+    constructor(model: Model<T>) {
+        this._model = model
     }
-    
-    async create(data: Partial<T>):Promise<T|null>{
+
+    async create(data: Partial<T>): Promise<T | null> {
         try {
             const document = await this._model.create(data);
             return document;
@@ -16,7 +16,7 @@ export default class GenericRepository<T extends Document>{
             return null;
         }
     }
-    
+
     async getAll(): Promise<T[]> {
         try {
             return await this._model.find();
@@ -25,8 +25,8 @@ export default class GenericRepository<T extends Document>{
             return [];
         }
     }
-     // Get a document by ID
-     async getById(id: Types.ObjectId | string): Promise<T | null> {
+    // Get a document by ID
+    async getById(id: Types.ObjectId | string): Promise<T | null> {
         try {
             return await this._model.findById(id);
         } catch (error) {
@@ -51,7 +51,7 @@ export default class GenericRepository<T extends Document>{
     }
 
     // Delete a document by ID
-    async delete(id: Types.ObjectId | string): Promise<boolean> {
+    async destroy(id: Types.ObjectId | string): Promise<boolean> {
         try {
             const result = await this._model.deleteOne({ _id: id });
             return result.deletedCount === 1;

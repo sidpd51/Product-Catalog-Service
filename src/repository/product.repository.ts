@@ -1,6 +1,9 @@
 import Product, { IProduct } from "../model/product.model";
 import GenericRepository from "./generic.repository";
 
-const productRepository = new GenericRepository<IProduct>(Product)
 
-export default productRepository
+export default class ProductRepository extends GenericRepository<IProduct>{
+    constructor(){
+        super(Product)
+    }
+}
