@@ -31,7 +31,6 @@ export default class GenericController<T extends Document> {
             const documents = await this._service.getAll();
             res.status(201).json(documents);
         } catch (error) {
-            console.log(error)
             res.status(500).json({ message: "Error fetching documents", error });
         }
     }
