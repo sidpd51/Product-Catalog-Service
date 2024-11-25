@@ -1,4 +1,4 @@
-import { ICategory } from "../model/catagory.model";
+import { ICategory } from "../model/catagoryModel";
 import CategoryService from "../service/categoryService";
 import GenericController from "./genericController";
 

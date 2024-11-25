@@ -1,4 +1,4 @@
-import Product, { IProduct } from "../model/product.model";
+import Product, { IProduct } from "../model/productModel";
 import GenericRepository from "./genericRepository";
 
 

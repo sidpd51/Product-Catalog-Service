@@ -1,4 +1,4 @@
-import { IReview } from "../model/review.model";
+import { IReview } from "../model/reviewModel";
 import ReviewRepository from "../repository/reviewRepository";
 import GenericService from "./genericService";
 
