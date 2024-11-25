@@ -1,5 +1,5 @@
 import { Document, Types } from "mongoose";
-import GenericRepository from "../repository/generic.repository";
+import GenericRepository from "../repository/genericRepository";
 
 export default class GenericService<T extends Document> {
     protected _repository: GenericRepository<T>;
@@ -35,16 +35,16 @@ export default class GenericService<T extends Document> {
         }
     }
 
-    async update(id:Types.ObjectId|string, data: Partial<T>): Promise<T|null>{
+    async update(id: Types.ObjectId | string, data: Partial<T>): Promise<T | null> {
         try {
-            return await this._repository.update(id,data);
+            return await this._repository.update(id, data);
         } catch (error) {
             console.error("Error in update operation:", error);
             throw new Error("Service error while updating the document");
         }
     }
 
-    async destroy(id:Types.ObjectId|string):Promise<boolean>{
+    async destroy(id: Types.ObjectId | string): Promise<boolean> {
         try {
             return await this._repository.destroy(id);
         } catch (error) {

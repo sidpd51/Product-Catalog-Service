@@ -1,4 +1,4 @@
-import GenericService from "../service/generic.service";
+import GenericService from "../service/genericService";
 import { Document } from "mongoose";
 import { Request, Response } from "express";
 
@@ -14,7 +14,7 @@ export default class GenericController<T extends Document> {
         this.update = this.update.bind(this);
         this.destroy = this.destroy.bind(this);
     }
-       
+
 
     async create(req: Request, res: Response): Promise<void> {
         try {
@@ -52,7 +52,7 @@ export default class GenericController<T extends Document> {
 
     async update(req: Request, res: Response): Promise<void> {
         try {
-            const updatedDocument = await this._service.update(req.params.id,req.body);
+            const updatedDocument = await this._service.update(req.params.id, req.body);
             if (updatedDocument) {
                 res.status(200).json(updatedDocument);
             } else {
@@ -69,9 +69,9 @@ export default class GenericController<T extends Document> {
             const isDeleted = await this._service.destroy(req.params.id);
             if (isDeleted) {
                 res.status(200).json({ message: "Document deleted successfully" });
-              } else {
+            } else {
                 res.status(404).json({ message: "Document not found" });
-              }
+            }
         } catch (error) {
             res.status(500).json({ message: "Error deleting document", error });
         }
