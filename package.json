@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/sidpd51/Product-Catalog-Service#readme",
   "dependencies": {
+    "axios": "^1.7.7",
     "express": "^4.21.1",
     "mongoose": "^8.8.2"
   },
