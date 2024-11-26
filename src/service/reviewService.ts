@@ -1,9 +1,10 @@
-import { Types } from "mongoose";
+import { Types, UpdateQuery } from "mongoose";
 import { IReview } from "../model/reviewModel";
 import ProductRepository from "../repository/productRepository";
 import ReviewRepository from "../repository/reviewRepository";
 import GenericService from "./genericService";
 import updateReviewAverageAndCount from "../utils/updateReviewAverageAndCount";
+import { IProduct } from "../model/productModel";
 
 export default class ReviewService extends GenericService<IReview> {
     private _productRepository: ProductRepository;
@@ -17,7 +18,7 @@ export default class ReviewService extends GenericService<IReview> {
             const review = await this._repository.create(data);
 
             if (!review || !review.productID) {
-                throw new Error("Service error while creating the document!");
+                throw new Error("Service error while creating the review!");
             }
 
             const product = await this._productRepository.getById(data.productID as string | Types.ObjectId);
@@ -38,6 +39,36 @@ export default class ReviewService extends GenericService<IReview> {
         } catch (error) {
             console.error("Error in create operation:", error);
             throw new Error("Service error while creating the document");
+        }
+    }
+
+    async destroy(id: Types.ObjectId | string): Promise<boolean> {
+        try {
+            const review = await this._repository.getById(id);
+            if (!review || !review.productID) {
+                throw new Error("Service error while deleting the review");
+            }
+            const product = await this._productRepository.getById(review.productID);
+            if (!product) {
+                throw new Error("Product not found!");
+            }
+            const [updatedAverageRating, udpatedReviewCount] = updateReviewAverageAndCount(product.rating.averageRating, product.rating.reviewCount, review.rating, false);
+            const updatedProduct = await this._productRepository.update(review.productID, {
+                $pull: { reviews: review._id },
+                $set: {
+                    'rating.averageRating': updatedAverageRating,
+                    'rating.reviewCount': udpatedReviewCount
+                }
+            } as UpdateQuery<IProduct>);
+
+            if (!updatedProduct) {
+                throw new Error("Failed to update the product")
+            }
+
+            return await this._repository.destroy(id);
+        } catch (error) {
+            console.error("Error in destroy operation:", error);
+            throw new Error("Service error while deleting the document");
         }
     }
 
