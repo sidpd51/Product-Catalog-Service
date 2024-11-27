@@ -1,5 +1,14 @@
-export default interface IFilterProduct {
+import { Types } from "mongoose";
+
+export interface IProductFilter {
     name?:string;
     minPrice?:number;
     maxPrice?:number;
+    categoryID?:string;
+}
+
+export interface IProductQuery {
+    name: { $regex: string, $options: string};
+    price: { $gte?:number, $lte?: number};
+    categoryID: Types.ObjectId | string;
 }
