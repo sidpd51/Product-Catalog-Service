@@ -14,7 +14,6 @@ export default class ProductController extends GenericController<IProduct> {
 
     async getAll(req: Request<{}, {},{}, IProductFilter>, res: Response): Promise<void> {
         try {
-            console.log(req.query)
             const documents = await this._productService.getAll(req.query);
             res.status(201).json(documents);
         } catch (error) {
