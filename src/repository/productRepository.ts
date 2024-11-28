@@ -12,7 +12,7 @@ export default class ProductRepository extends GenericRepository<IProduct> {
         try {
 
             const query: Partial<IProductQuery> = {};
-
+            
             if (filter) {
                 if (filter.name) {
                     query.name = { $regex: `^${filter.name}|.*${filter.name}.*`, $options: "i" };

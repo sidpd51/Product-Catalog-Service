@@ -11,10 +11,9 @@ export default class ProductService extends GenericService<IProduct> {
         this._productRepository = productRepository;
     }
 
-    getAll(filter?: IProductFilter): Promise<IProduct[]> {
+    async getAll(filter?: IProductFilter): Promise<IProduct[]> {
         try {
-
-            return this._productRepository.getAll(filter);
+            return await this._productRepository.getAll(filter);
         } catch (error) {
             console.error("Error in ProductService getAll operation:", error);
             throw new Error("Service error while fetching products with filters");

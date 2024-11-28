@@ -4,7 +4,7 @@ export interface IProductFilter {
     name?:string;
     minPrice?:number;
     maxPrice?:number;
-    categoryID?:string;
+    categoryID?:string|Types.ObjectId;
 }
 
 export interface IProductQuery {
