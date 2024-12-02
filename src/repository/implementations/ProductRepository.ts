@@ -1,9 +1,10 @@
-import { IProductFilter, IProductQuery, } from "../dtos/filterProduct";
-import Product, { IProduct } from "../model/productModel";
-import GenericRepository from "./genericRepository";
+import { IProductFilter, IProductQuery, } from "../../dtos/filterProduct";
+import Product, { IProduct } from "../../model/productModel";
+import IProductRepository from "../interfaces/IProductRepository";
+import GenericRepository from "./GenericRepository";
 
 
-export default class ProductRepository extends GenericRepository<IProduct> {
+export default class ProductRepository extends GenericRepository<IProduct> implements IProductRepository {
     constructor() {
         super(Product)
     }
@@ -12,7 +13,7 @@ export default class ProductRepository extends GenericRepository<IProduct> {
         try {
 
             const query: Partial<IProductQuery> = {};
-            
+
             if (filter) {
                 if (filter.name) {
                     query.name = { $regex: `^${filter.name}|.*${filter.name}.*`, $options: "i" };
