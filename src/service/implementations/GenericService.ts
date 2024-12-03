@@ -1,7 +1,8 @@
 import { Document, Types } from "mongoose";
-import GenericRepository from "../repository/implementations/GenericRepository";
+import GenericRepository from "../../repository/implementations/GenericRepository";
+import IGenericService from "../interfaces/IGenericService";
 
-export default class GenericService<T extends Document> {
+export default class GenericService<T extends Document> implements IGenericService<T> {
     protected _repository: GenericRepository<T>;
 
     constructor(repository: GenericRepository<T>) {
