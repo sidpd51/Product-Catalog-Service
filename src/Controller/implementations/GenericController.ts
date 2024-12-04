@@ -1,13 +1,17 @@
 import { Document } from "mongoose";
 import { Request, Response } from "express";
-import GenericService from "../service/implementations/GenericService";
+import IGenericController from "../interfaces/IGenericController";
+import IGenericService from "../../service/interfaces/IGenericService";
+import { injectable } from "inversify";
+import { inject } from "inversify";
+import TYPES from "../../types/TYPES";
 
-export default class GenericController<T extends Document> {
-    private _service: GenericService<T>;
+@injectable()
+export default class GenericController<T extends Document> implements IGenericController {
+    private _service: IGenericService<T>;
 
-    constructor(service: GenericService<T>) {
+    constructor(@inject(TYPES.IGenericService) service: IGenericService<T>) {
         this._service = service
-
         this.getAll = this.getAll.bind(this);
         this.create = this.create.bind(this);
         this.getById = this.getById.bind(this);
@@ -29,6 +33,7 @@ export default class GenericController<T extends Document> {
     async getAll(req: Request, res: Response): Promise<void> {
         try {
             const documents = await this._service.getAll();
+            console.log('get all records')
             res.status(201).json(documents);
         } catch (error) {
             res.status(500).json({ message: "Error fetching documents", error });

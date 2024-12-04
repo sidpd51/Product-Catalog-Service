@@ -1,15 +1,18 @@
+import { injectable } from "inversify";
 import { IProductFilter } from "../../dtos/filterProduct";
 import { IProduct } from "../../model/productModel";
-import ProductRepository from "../../repository/implementations/ProductRepository";
 import IProductService from "../interfaces/IProductService";
 import GenericService from "./GenericService"
+import { inject } from "inversify";
+import TYPES from "../../types/TYPES";
+import IProductRepository from "../../repository/interfaces/IProductRepository";
 
+@injectable()
 export default class ProductService extends GenericService<IProduct> implements IProductService {
-    private _productRepository: ProductRepository;
-    constructor() {
-        const productRepository = new ProductRepository;
-        super(productRepository);
-        this._productRepository = productRepository;
+    private _productRepository: IProductRepository;
+    constructor(@inject(TYPES.IProductRepository) repository: IProductRepository ) {
+        super(repository);
+        this._productRepository = repository;
     }
 
     async getAll(filter?: IProductFilter): Promise<IProduct[]> {

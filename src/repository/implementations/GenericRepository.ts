@@ -1,6 +1,8 @@
-import mongoose, { Document, Model, Types } from "mongoose";
+import { Document, Model, Types } from "mongoose";
 import IGenericRepository from "../interfaces/IGenericRepository";
+import { injectable } from "inversify";
 
+@injectable()
 export default class GenericRepository<T extends Document> implements IGenericRepository<T> {
     private _model: Model<T>
 
@@ -26,7 +28,7 @@ export default class GenericRepository<T extends Document> implements IGenericRe
             return [];
         }
     }
-    // Get a document by ID
+    
     async getById(id: Types.ObjectId | string): Promise<T | null> {
         try {
             return await this._model.findById(id);
@@ -36,7 +38,6 @@ export default class GenericRepository<T extends Document> implements IGenericRe
         }
     }
 
-    // Update a document by ID
     async update(
         id: Types.ObjectId | string,
         data: Partial<T>
@@ -51,7 +52,6 @@ export default class GenericRepository<T extends Document> implements IGenericRe
         }
     }
 
-    // Delete a document by ID
     async destroy(id: Types.ObjectId | string): Promise<boolean> {
         try {
             const result = await this._model.deleteOne({ _id: id });

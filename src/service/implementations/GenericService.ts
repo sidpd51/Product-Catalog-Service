@@ -1,11 +1,13 @@
 import { Document, Types } from "mongoose";
-import GenericRepository from "../../repository/implementations/GenericRepository";
 import IGenericService from "../interfaces/IGenericService";
+import { injectable, unmanaged } from "inversify";
+import IGenericRepository from "../../repository/interfaces/IGenericRepository";
 
+@injectable()
 export default class GenericService<T extends Document> implements IGenericService<T> {
-    protected _repository: GenericRepository<T>;
+    protected _repository: IGenericRepository<T>;
 
-    constructor(repository: GenericRepository<T>) {
+    constructor( @unmanaged() repository: IGenericRepository<T>) {
         this._repository = repository
     }
 
