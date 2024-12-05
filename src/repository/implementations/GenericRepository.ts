@@ -1,6 +1,7 @@
 import mongoose, { Document, Model, Types } from "mongoose";
+import IGenericRepository from "../interfaces/IGenericRepository";
 
-export default class GenericRepository<T extends Document> {
+export default class GenericRepository<T extends Document> implements IGenericRepository<T> {
     private _model: Model<T>
 
     constructor(model: Model<T>) {
@@ -25,7 +26,7 @@ export default class GenericRepository<T extends Document> {
             return [];
         }
     }
-    // Get a document by ID
+
     async getById(id: Types.ObjectId | string): Promise<T | null> {
         try {
             return await this._model.findById(id);
@@ -35,7 +36,6 @@ export default class GenericRepository<T extends Document> {
         }
     }
 
-    // Update a document by ID
     async update(
         id: Types.ObjectId | string,
         data: Partial<T>
