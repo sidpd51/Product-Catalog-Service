@@ -1,8 +1,9 @@
 import GenericService from "../../service/implementations/GenericService";
 import { Document } from "mongoose";
 import { Request, Response } from "express";
+import IGenericController from "../interfaces/IGenericController";
 
-export default class GenericController<T extends Document> {
+export default class GenericController<T extends Document> implements IGenericController {
     private _service: GenericService<T>;
 
     constructor(service: GenericService<T>) {
