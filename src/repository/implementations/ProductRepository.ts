@@ -1,15 +1,15 @@
 import { IProductFilter, IProductQuery, } from "../../dtos/filterProduct";
-import Product, { IProduct } from "../../model/productModel";
+import Product, { IProductModel } from "../../model/productModel";
 import IProductRepository from "../interfaces/IProductRepository";
 import GenericRepository from "./GenericRepository";
 
 
-export default class ProductRepository extends GenericRepository<IProduct> implements IProductRepository {
+export default class ProductRepository extends GenericRepository<IProductModel> implements IProductRepository {
     constructor() {
         super(Product)
     }
 
-    async getAll(filter?: IProductFilter): Promise<IProduct[]> {
+    async getAll(filter?: IProductFilter): Promise<IProductModel[]> {
         try {
 
             const query: Partial<IProductQuery> = {};

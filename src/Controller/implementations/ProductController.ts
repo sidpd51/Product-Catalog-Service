@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { IProduct } from "../../model/productModel";
+import { IProductModel } from "../../model/productModel";
 import ProductService from "../../service/implementations/ProductService";
 import GenericController from "./GenericController";
 import { IProductFilter, IProductQuery } from "../../dtos/filterProduct";
 
-export default class ProductController extends GenericController<IProduct> {
+export default class ProductController extends GenericController<IProductModel> {
     private _productService: ProductService;
     constructor() {
         const productService = new ProductService();

@@ -1,9 +1,9 @@
 import { IProductFilter } from "../../dtos/filterProduct";
-import { IProduct } from "../../model/productModel";
+import { IProductModel } from "../../model/productModel";
 import ProductRepository from "../../repository/implementations/ProductRepository";
 import GenericService from "./GenericService"
 
-export default class ProductService extends GenericService<IProduct> {
+export default class ProductService extends GenericService<IProductModel> {
     private _productRepository: ProductRepository;
     constructor() {
         const productRepository = new ProductRepository;
@@ -11,7 +11,7 @@ export default class ProductService extends GenericService<IProduct> {
         this._productRepository = productRepository;
     }
 
-    async getAll(filter?: IProductFilter): Promise<IProduct[]> {
+    async getAll(filter?: IProductFilter): Promise<IProductModel[]> {
         try {
             return await this._productRepository.getAll(filter);
         } catch (error) {

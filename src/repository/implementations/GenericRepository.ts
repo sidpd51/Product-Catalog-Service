@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Types } from "mongoose";
+import { Document, Model, Types } from "mongoose";
 import IGenericRepository from "../interfaces/IGenericRepository";
 
 export default class GenericRepository<T extends Document> implements IGenericRepository<T> {

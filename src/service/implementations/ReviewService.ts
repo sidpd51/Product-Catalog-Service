@@ -1,19 +1,19 @@
 import { Types, UpdateQuery } from "mongoose";
-import { IReview } from "../../model/reviewModel";
+import { IReviewModel } from "../../model/reviewModel";
 import ProductRepository from "../../repository/implementations/ProductRepository";
 import ReviewRepository from "../../repository/implementations/ReviewRepository";
 import GenericService from "./GenericService";
 import updateReviewAverageAndCount from "../../utils/updateReviewAverageAndCount";
-import { IProduct } from "../../model/productModel";
+import { IProductModel } from "../../model/productModel";
 
-export default class ReviewService extends GenericService<IReview> {
+export default class ReviewService extends GenericService<IReviewModel> {
     private _productRepository: ProductRepository;
     constructor() {
         super(new ReviewRepository())
         this._productRepository = new ProductRepository();
     }
 
-    async create(data: Partial<IReview>): Promise<IReview | null> {
+    async create(data: Partial<IReviewModel>): Promise<IReviewModel | null> {
         try {
             const review = await this._repository.create(data);
 
@@ -59,7 +59,7 @@ export default class ReviewService extends GenericService<IReview> {
                     'rating.averageRating': updatedAverageRating,
                     'rating.reviewCount': udpatedReviewCount
                 }
-            } as UpdateQuery<IProduct>);
+            } as UpdateQuery<IProductModel>);
 
             if (!updatedProduct) {
                 throw new Error("Failed to update the product")
