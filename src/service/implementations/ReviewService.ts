@@ -1,10 +1,10 @@
 import { Types, UpdateQuery } from "mongoose";
-import { IReview } from "../model/reviewModel";
-import ProductRepository from "../repository/productRepository";
-import ReviewRepository from "../repository/reviewRepository";
-import GenericService from "./genericService";
-import updateReviewAverageAndCount from "../utils/updateReviewAverageAndCount";
-import { IProduct } from "../model/productModel";
+import { IReview } from "../../model/reviewModel";
+import ProductRepository from "../../repository/implementations/ProductRepository";
+import ReviewRepository from "../../repository/implementations/ReviewRepository";
+import GenericService from "./GenericService";
+import updateReviewAverageAndCount from "../../utils/updateReviewAverageAndCount";
+import { IProduct } from "../../model/productModel";
 
 export default class ReviewService extends GenericService<IReview> {
     private _productRepository: ProductRepository;

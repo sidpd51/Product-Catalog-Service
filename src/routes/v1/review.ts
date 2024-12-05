@@ -1,5 +1,5 @@
 import express from 'express'
-import ReviewController from '../../Controller/reviewController'
+import ReviewController from '../../Controller/implementations/ReviewController'
 
 const reviewRouter = express.Router()
 const review = new ReviewController()

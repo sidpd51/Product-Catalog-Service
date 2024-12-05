@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { IProduct } from "../model/productModel";
-import ProductService from "../service/productService";
-import GenericController from "./genericController";
-import { IProductFilter, IProductQuery } from "../dtos/filterProduct";
+import { IProduct } from "../../model/productModel";
+import ProductService from "../../service/implementations/ProductService";
+import GenericController from "./GenericController";
+import { IProductFilter, IProductQuery } from "../../dtos/filterProduct";
 
 export default class ProductController extends GenericController<IProduct> {
     private _productService: ProductService;
@@ -12,7 +12,7 @@ export default class ProductController extends GenericController<IProduct> {
         this._productService = productService;
     }
 
-    async getAll(req: Request<{}, {},{}, IProductFilter>, res: Response): Promise<void> {
+    async getAll(req: Request<{}, {}, {}, IProductFilter>, res: Response): Promise<void> {
         try {
             const documents = await this._productService.getAll(req.query);
             res.status(201).json(documents);

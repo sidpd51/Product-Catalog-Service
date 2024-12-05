@@ -1,5 +1,5 @@
-import Category, { ICategory } from "../model/catagoryModel";
-import GenericRepository from "./genericRepository";
+import Category, { ICategory } from "../../model/catagoryModel";
+import GenericRepository from "./GenericRepository";
 
 
 export default class CategoryRepository extends GenericRepository<ICategory> {

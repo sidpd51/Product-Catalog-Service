@@ -1,4 +1,4 @@
-import GenericService from "../service/genericService";
+import GenericService from "../../service/implementations/GenericService";
 import { Document } from "mongoose";
 import { Request, Response } from "express";
 

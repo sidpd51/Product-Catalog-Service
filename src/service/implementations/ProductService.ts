@@ -1,7 +1,7 @@
-import { IProductFilter } from "../dtos/filterProduct";
-import { IProduct } from "../model/productModel";
-import ProductRepository from "../repository/productRepository";
-import GenericService from "./genericService"
+import { IProductFilter } from "../../dtos/filterProduct";
+import { IProduct } from "../../model/productModel";
+import ProductRepository from "../../repository/implementations/ProductRepository";
+import GenericService from "./GenericService"
 
 export default class ProductService extends GenericService<IProduct> {
     private _productRepository: ProductRepository;
