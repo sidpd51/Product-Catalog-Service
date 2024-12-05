@@ -1,9 +1,10 @@
 import { IProductFilter } from "../../dtos/filterProduct";
 import { IProductModel } from "../../model/productModel";
 import ProductRepository from "../../repository/implementations/ProductRepository";
+import IProductService from "../interfaces/IProductService";
 import GenericService from "./GenericService"
 
-export default class ProductService extends GenericService<IProductModel> {
+export default class ProductService extends GenericService<IProductModel> implements IProductService {
     private _productRepository: ProductRepository;
     constructor() {
         const productRepository = new ProductRepository;
