@@ -5,8 +5,9 @@ import ReviewRepository from "../../repository/implementations/ReviewRepository"
 import GenericService from "./GenericService";
 import updateReviewAverageAndCount from "../../utils/updateReviewAverageAndCount";
 import { IProductModel } from "../../model/productModel";
+import IReviewService from "../interfaces/IReviewService";
 
-export default class ReviewService extends GenericService<IReviewModel> {
+export default class ReviewService extends GenericService<IReviewModel> implements IReviewService {
     private _productRepository: ProductRepository;
     constructor() {
         super(new ReviewRepository())
