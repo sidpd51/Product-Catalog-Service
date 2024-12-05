@@ -3,8 +3,9 @@ import { IProductModel } from "../../model/productModel";
 import ProductService from "../../service/implementations/ProductService";
 import GenericController from "./GenericController";
 import { IProductFilter, IProductQuery } from "../../dtos/filterProduct";
+import IProductController from "../interfaces/IProductController";
 
-export default class ProductController extends GenericController<IProductModel> {
+export default class ProductController extends GenericController<IProductModel> implements IProductController {
     private _productService: ProductService;
     constructor() {
         const productService = new ProductService();
