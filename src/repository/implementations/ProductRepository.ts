@@ -1,9 +1,10 @@
 import { IProductFilter, IProductQuery, } from "../../dtos/filterProduct";
 import Product, { IProduct } from "../../model/productModel";
+import IProductRepository from "../interfaces/IProductRepository";
 import GenericRepository from "./GenericRepository";
 
 
-export default class ProductRepository extends GenericRepository<IProduct> {
+export default class ProductRepository extends GenericRepository<IProduct> implements IProductRepository {
     constructor() {
         super(Product)
     }
