@@ -1,8 +1,11 @@
 import express from 'express'
 import CategoryController from '../../Controller/implementations/CategoryController'
+import container from '../../inversify.config'
+import ICategoryController from '../../Controller/interfaces/ICategoryController'
+import TYPES from '../../TYPES'
 
 const categoryRouter = express.Router()
-const category = new CategoryController()
+const category = container.get<ICategoryController>(TYPES.ICategoryController)
 
 categoryRouter.post('/', category.create)
 categoryRouter.get('/:id', category.getById)
