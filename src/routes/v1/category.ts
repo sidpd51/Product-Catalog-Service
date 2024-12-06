@@ -1,5 +1,4 @@
 import express from 'express'
-import CategoryController from '../../Controller/implementations/CategoryController'
 import container from '../../inversify.config'
 import ICategoryController from '../../Controller/interfaces/ICategoryController'
 import TYPES from '../../TYPES'

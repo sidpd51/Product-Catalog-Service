@@ -1,12 +1,12 @@
 import { Document, Types } from "mongoose";
-import GenericRepository from "../../repository/implementations/GenericRepository";
 import IGenericService from "../interfaces/IGenericService";
+import IGenericRepository from "../../repository/interfaces/IGenericRepository";
 
 export default class GenericService<T extends Document> implements IGenericService<T> {
-    protected _repository: GenericRepository<T>;
+    protected _repository: IGenericRepository<T>;
 
-    constructor(repository: GenericRepository<T>) {
-        this._repository = repository
+    constructor(repository: IGenericRepository<T>) {
+        this._repository = repository;
     }
 
     async create(data: Partial<T>): Promise<T | null> {
