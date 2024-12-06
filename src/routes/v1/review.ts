@@ -1,8 +1,10 @@
 import express from 'express'
-import ReviewController from '../../Controller/reviewController'
+import container from '../../inversify.config'
+import IReviewController from '../../Controller/interfaces/IReviewController'
+import TYPES from '../../TYPES'
 
 const reviewRouter = express.Router()
-const review = new ReviewController()
+const review = container.get<IReviewController>(TYPES.IReviewController)
 
 reviewRouter.post('/', review.create)
 reviewRouter.get('/:id', review.getById)

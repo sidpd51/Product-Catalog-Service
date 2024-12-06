@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose'
 
-export interface IReview extends Document {
+export interface IReviewModel extends Document {
     productID: mongoose.Types.ObjectId;
     userID: mongoose.Types.ObjectId;
     rating: number;
@@ -33,6 +33,6 @@ const reviewSchema = new Schema({
     }
 }, { timestamps: true });
 
-const Review: Model<IReview> = mongoose.model<IReview>('Review', reviewSchema);
+const ReviewModel: Model<IReviewModel> = mongoose.model<IReviewModel>('Review', reviewSchema);
 
-export default Review;
+export default ReviewModel;

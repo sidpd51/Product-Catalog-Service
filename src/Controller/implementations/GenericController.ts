@@ -1,11 +1,13 @@
-import GenericService from "../service/genericService";
+import GenericService from "../../service/implementations/GenericService";
 import { Document } from "mongoose";
 import { Request, Response } from "express";
+import IGenericController from "../interfaces/IGenericController";
+import IGenericService from "../../service/interfaces/IGenericService";
 
-export default class GenericController<T extends Document> {
-    private _service: GenericService<T>;
+export default class GenericController<T extends Document> implements IGenericController {
+    private _service: IGenericService<T>;
 
-    constructor(service: GenericService<T>) {
+    constructor(service: IGenericService<T>) {
         this._service = service
 
         this.getAll = this.getAll.bind(this);
