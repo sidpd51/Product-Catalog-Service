@@ -1,19 +1,23 @@
 import { Types, UpdateQuery } from "mongoose";
-import { IReview } from "../model/reviewModel";
-import ProductRepository from "../repository/productRepository";
-import ReviewRepository from "../repository/reviewRepository";
-import GenericService from "./genericService";
-import updateReviewAverageAndCount from "../utils/updateReviewAverageAndCount";
-import { IProduct } from "../model/productModel";
+import { IReviewModel } from "../../model/reviewModel";
+import GenericService from "./GenericService";
+import updateReviewAverageAndCount from "../../utils/updateReviewAverageAndCount";
+import { IProductModel } from "../../model/productModel";
+import IReviewService from "../interfaces/IReviewService";
+import { inject, injectable } from "inversify";
+import TYPES from "../../TYPES";
+import IProductRepository from "../../repository/interfaces/IProductRepository";
+import IReviewRepository from "../../repository/interfaces/IReviewRepository";
 
-export default class ReviewService extends GenericService<IReview> {
-    private _productRepository: ProductRepository;
-    constructor() {
-        super(new ReviewRepository())
-        this._productRepository = new ProductRepository();
+@injectable()
+export default class ReviewService extends GenericService<IReviewModel> implements IReviewService {
+    private _productRepository: IProductRepository;
+    constructor(@inject(TYPES.IReviewRepository) repository: IReviewRepository, @inject(TYPES.IProductRepository) productRepository: IProductRepository ) {
+        super(repository)
+        this._productRepository = productRepository;
     }
 
-    async create(data: Partial<IReview>): Promise<IReview | null> {
+    async create(data: Partial<IReviewModel>): Promise<IReviewModel | null> {
         try {
             const review = await this._repository.create(data);
 
@@ -59,7 +63,7 @@ export default class ReviewService extends GenericService<IReview> {
                     'rating.averageRating': updatedAverageRating,
                     'rating.reviewCount': udpatedReviewCount
                 }
-            } as UpdateQuery<IProduct>);
+            } as UpdateQuery<IProductModel>);
 
             if (!updatedProduct) {
                 throw new Error("Failed to update the product")
