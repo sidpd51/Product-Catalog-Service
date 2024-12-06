@@ -1,17 +1,20 @@
 import { Types, UpdateQuery } from "mongoose";
 import { IReviewModel } from "../../model/reviewModel";
-import ProductRepository from "../../repository/implementations/ProductRepository";
-import ReviewRepository from "../../repository/implementations/ReviewRepository";
 import GenericService from "./GenericService";
 import updateReviewAverageAndCount from "../../utils/updateReviewAverageAndCount";
 import { IProductModel } from "../../model/productModel";
 import IReviewService from "../interfaces/IReviewService";
+import { inject, injectable } from "inversify";
+import TYPES from "../../TYPES";
+import IProductRepository from "../../repository/interfaces/IProductRepository";
+import IReviewRepository from "../../repository/interfaces/IReviewRepository";
 
+@injectable()
 export default class ReviewService extends GenericService<IReviewModel> implements IReviewService {
-    private _productRepository: ProductRepository;
-    constructor() {
-        super(new ReviewRepository())
-        this._productRepository = new ProductRepository();
+    private _productRepository: IProductRepository;
+    constructor(@inject(TYPES.IReviewRepository) repository: IReviewRepository, @inject(TYPES.IProductRepository) productRepository: IProductRepository ) {
+        super(repository)
+        this._productRepository = productRepository;
     }
 
     async create(data: Partial<IReviewModel>): Promise<IReviewModel | null> {

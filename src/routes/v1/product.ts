@@ -1,8 +1,10 @@
 import express from 'express'
-import ProductController from '../../Controller/implementations/ProductController'
+import container from '../../inversify.config'
+import IProductController from '../../Controller/interfaces/IProductController'
+import TYPES from '../../TYPES'
 
 const productRouter = express.Router()
-const product = new ProductController()
+const product = container.get<IProductController>(TYPES.IProductController)
 
 productRouter.post('/', product.create)
 productRouter.get('/:id', product.getById)

@@ -1,12 +1,16 @@
+import { inject, injectable } from "inversify";
 import { IProductFilter, IProductQuery, } from "../../dtos/filterProduct";
 import Product, { IProductModel } from "../../model/productModel";
 import IProductRepository from "../interfaces/IProductRepository";
 import GenericRepository from "./GenericRepository";
+import TYPES from "../../TYPES";
+import { Model } from "mongoose";
 
 
+@injectable()
 export default class ProductRepository extends GenericRepository<IProductModel> implements IProductRepository {
-    constructor() {
-        super(Product)
+    constructor(@inject(TYPES.IProductModel) model: Model<IProductModel>) {
+        super(model)
     }
 
     async getAll(filter?: IProductFilter): Promise<IProductModel[]> {
