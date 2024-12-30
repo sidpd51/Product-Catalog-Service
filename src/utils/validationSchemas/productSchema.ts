@@ -61,5 +61,5 @@ const createProductSchema = {
     }
 }
 
-export const createProductValidator = checkSchema(createProductSchema)
+export const productValidator = checkSchema(createProductSchema)
 
