@@ -2,8 +2,8 @@ import express from 'express';
 import IProductController from '../../Controller/interfaces/IProductController';
 import TYPES from '../../TYPES';
 import container from '../../inversify.config';
-import { productValidator } from '../../utils/validationSchemas/productSchema';
 import handleValidationErrors from '../../utils/validationSchemas/handleValidationErrors';
+import { productValidator } from '../../utils/validationSchemas/productSchema';
 
 const productRouter = express.Router()
 const product = container.get<IProductController>(TYPES.IProductController)
